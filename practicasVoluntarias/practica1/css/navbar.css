@@ -1,0 +1,29 @@
+ .navbar{
+    background-color: #103CA3;
+    padding: 1rem;
+}
+
+.navbar-collapse{
+    align-items: center;
+    justify-content: space-between;
+} 
+
+.navbar-brand{
+    color: white;
+}
+
+.nav-link {
+    color: white;
+} 
+
+.search
+{
+    margin-top: 2rem;
+    max-width: 50rem;
+}
+
+@media screen and (max-width: 767px) {
+    .navbar-brand{
+        display: none;
+    }
+}

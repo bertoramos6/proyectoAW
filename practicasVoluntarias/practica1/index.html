@@ -6,13 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/navbar.css">
-   
-
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
-    <!-- <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script> -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <title>Practica Voluntaria 1</title>
 </head>
@@ -23,7 +19,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbar-toggler">
-            <a class="navbar-brand" href="#">Odyssey</a>
+            <img src="media/logo-big-transparent.png" alt="logo de Odyssey Travel" class="navbar-brand"></img>
             <ul class="navbar-nav d-flex justify-content-center align-items-center">
               <li class="nav-item">
                 <a class="nav-link" href="#">Home</a>
@@ -32,7 +28,7 @@
                 <a class="nav-link" href="#">Contacto</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" >Sobre nosotros</a>
+                <a class="nav-link" href="#">Sobre nosotros</a>
               </li>
             </ul>
           </div>
@@ -41,7 +37,7 @@
     
     <div class="container search">
         <form class="d-flex" role="search">
-            <button class="btn " type="submit"><img src="./media/search.svg" alt="buscar"></button>
+            <button class="btn " type="submit"><img src="media/search.svg" alt="buscar"></button>
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         </form>
     </div>
@@ -50,61 +46,78 @@
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         <div class="col">
           <div class="card">
-            <img class="card-img-top" src="./media/barcelona.jpg" alt="barcelona">
+            <img class="card-img-top" src="media/barcelona.jpg" alt="barcelona">
             <div class="card-body">
               <h3 class="card-title">Barcelona</h3>
-              <p class="card-text">90,6€</p>
+              <p class="card-text">Desde 90,60€</p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
-            <img class="card-img-top" src="./media/budapest.jpg" alt="budapest">
+            <img class="card-img-top" src="media/budapest.jpg" alt="budapest">
             <div class="card-body">
               <h3 class="card-title">Budapest</h3>
-              <p class="card-text">90,6€</p>
+              <p class="card-text">Desde 105,79€</p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
-            <img class="card-img-top" src="./media/ibiza.jpg" alt="ibiza">
+            <img class="card-img-top" src="media/ibiza.jpg" alt="ibiza">
             <div class="card-body">
               <h3 class="card-title">Ibiza</h3>
-              <p class="card-text">90,6€</p>
+              <p class="card-text">Desde 213,44€</p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
-            <img class="card-img-top" src="./media/Londres.jpg" alt="londres">
+            <img class="card-img-top" src="media/Londres.jpg" alt="londres">
             <div class="card-body">
               <h3 class="card-title">Londres</h3>
-              <p class="card-text">90,6€</p>
+              <p class="card-text">Desde 50,4€</p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
-            <img class="card-img-top" src="./media/milan.jpg" alt="milan">
+            <img class="card-img-top" src="media/milan.jpg" alt="milan">
             <div class="card-body">
               <h3 class="card-title">Milan</h3>
-              <p class="card-text">90,6€</p>
+              <p class="card-text">Desde 99,99€</p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
-            <img class="card-img-top" src="./media/paris.jpg" alt="paris">
+            <img class="card-img-top" src="media/paris.jpg" alt="paris">
             <div class="card-body">
               <h3 class="card-title">Paris</h3>
-              <p class="card-text">90,6€</p>
+              <p class="card-text">Desde 68,83€</p>
             </div>
           </div>
         </div>
       </div>
     </div>
     
+    <div class="ver-mas-container">
+      <button class="ver-mas-boton">Ver más destinos</button>
+    </div>
+
+    <div class="footer-container">
+      <div class="footer-text-container">
+        <img src="media/logo-small-transparent.png" alt="logo de la agencia Odyssey Travel en formato pequeño" class="footer-logo"></img>
+        <div class="footer-text">Política de cookies</div>
+        <div class="footer-text">Política de privacidad</div>
+        <div class="footer-text">FAQ</div>
+      </div>
+      <div class="footer-icons-container">
+        <img src="media/instagram.png" alt="Logo instagram" class="imagen-logo">
+        <img src="media/twitter.png" alt="Logo twitter" class="imagen-logo">
+        <img src="media/facebook.png" alt="Logo facebook UCM" class="imagen-logo">
+      </div>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

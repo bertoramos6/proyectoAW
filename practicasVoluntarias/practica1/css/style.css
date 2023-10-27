@@ -180,9 +180,18 @@ Estilos de la página de destino
 
 .imagen-destino-main {
     border-radius: 2rem 0;
-    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
 }
 
 .info-detallada-destino {
     margin: 2rem;
+    height: 30rem;
+}
+
+.texto-detallado-destino {
+    overflow: auto;
+    max-height: 100%;
+    margin-top: 1rem;
 }

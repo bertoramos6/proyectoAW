@@ -1,6 +1,21 @@
+ /*
+ Estilos sobre el body, html y todos los container de las páginas
+ */
  body {
     font-family: 'Roboto', 'Trebuchet MS', sans-serif;
+    /* Necesario para que el footer se quede abajo */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
  }
+ html {
+    height: 100%; /* Necesario para que el footer se quede abajo */
+ }
+
+ .container {
+    flex: 1; /* Necesario para que el footer se quede abajo */
+}
+
 /*  
  Estilos navbar 
 */
@@ -126,6 +141,7 @@ Estilos del footer
     padding: 3rem;
     justify-content: space-between;
     flex-wrap: wrap;
+    width: 110%;
 }
 
 .footer-text-container {
@@ -178,20 +194,42 @@ Estilos del footer
 Estilos de la página de destino
 */
 
+.titulo-destino {
+    margin-top: 2rem;
+}
+
 .imagen-destino-main {
     border-radius: 2rem 0;
     height: 100%;
-    max-width: 100%;
     object-fit: cover;
 }
 
 .info-detallada-destino {
     margin: 2rem;
-    height: 30rem;
 }
 
-.texto-detallado-destino {
-    overflow: auto;
-    max-height: 100%;
-    margin-top: 1rem;
+@media screen and (max-width: 992px) {
+    .texto-detallado-destino {
+        overflow: none;
+        margin-top: 2rem;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .texto-detallado-destino {
+        max-height: 30rem;
+        overflow: auto;
+    }
+}
+
+/*
+Estilos del formulario de reserva
+*/
+
+.contenedor-formulario-reserva {
+    margin: 2rem 0;
+}
+
+input.form-control {
+    margin-bottom: 1rem;
 }

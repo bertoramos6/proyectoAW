@@ -230,6 +230,6 @@ Estilos del formulario de reserva
     margin: 2rem 0;
 }
 
-input.form-control {
+input .form-control {
     margin-bottom: 1rem;
 }

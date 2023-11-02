@@ -38,4 +38,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.listen(3000, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Servidor corriendo en el puerto 3000");
+  }
+});
+
 module.exports = app;

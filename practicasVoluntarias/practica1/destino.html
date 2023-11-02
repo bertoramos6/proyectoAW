@@ -80,6 +80,24 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">¡Éxito!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            Tu reserva para Barcelona ha sido realizada con éxito. ¡Nos vemos pronto! <!-- TODO: Añadir datos de la reserva -->
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <div class="row footer-container">
       <div class="col-md-9 footer-text-container">
         <img src="media/logo-small-transparent.png" alt="logo de la agencia Odyssey Travel en formato pequeño" class="footer-logo">
@@ -88,9 +106,15 @@
         <div class="footer-text">FAQ</div>
       </div>
       <div class="col-md-3 float-right footer-icons-container">
-        <img src="media/instagram.png" alt="Logo instagram" class="imagen-logo">
-        <img src="media/twitter.png" alt="Logo twitter" class="imagen-logo">
-        <img src="media/facebook.png" alt="Logo facebook UCM" class="imagen-logo">
+        <a target="_blank" href="https://instagram.com">
+            <img src="media/instagram.png" alt="Logo instagram" class="imagen-logo">
+        </a>
+        <a target="_blank" href="https://twitter.com">
+            <img src="media/twitter.png" alt="Logo twitter" class="imagen-logo">
+        </a>
+        <a target="_blank" href="https://facebook.com">
+            <img src="media/facebook.png" alt="Logo facebook" class="imagen-logo">
+        </a>
       </div>
     </div>
     
@@ -99,34 +123,39 @@
             'use strict';
             window.addEventListener('load', function() {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
+                let forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    } else {
-                        var startDate = new Date(document.getElementById('startDate').value);
-                        var endDate = new Date(document.getElementById('endDate').value);
-                        var today = new Date();
-                        
-                        if (startDate <= today) {
-                            alert('La fecha de inicio debe ser posterior a hoy.');
-                            event.preventDefault();
-                            event.stopPropagation();
-                            return false;
+                let validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        } else {
+                            let startDate = new Date(document.getElementById('startDate').value);
+                            let endDate = new Date(document.getElementById('endDate').value);
+                            let today = new Date();
+                            today.setHours(0,0,0,0);
+                            
+                            if (startDate < today) {
+                                alert('La fecha de inicio debe ser posterior a hoy.');
+                                event.preventDefault();
+                                event.stopPropagation();
+                                return false;
+                            }
+                            
+                            if (endDate < startDate) {
+                                alert('La fecha de fin debe ser posterior a la fecha de inicio.');
+                                event.preventDefault();
+                                event.stopPropagation();
+                                return false;
+                            }
+
+                            // Mostramos el modal con el éxito de la reserva
+                            let successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                            successModal.show();
+                            form.classList.add('was-validated');
                         }
-                        
-                        if (endDate <= startDate) {
-                            alert('La fecha de fin debe ser posterior a la fecha de inicio.');
-                            event.preventDefault();
-                            event.stopPropagation();
-                            return false;
-                        }
-                    }
-                    form.classList.add('was-validated');
-                }, false);
+                    }, false);
                 });
             }, false);
         })();

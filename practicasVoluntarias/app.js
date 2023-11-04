@@ -11,18 +11,38 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
+
+//Ruta principal
 app.get("/", function(request, response) {
   response.status(200);
   daoDestino.buscarTodosDestinos((err, dest) => {
     if (err) {
         console.error("Error al buscar el usuario:", err);
     } else {
-        dest[0].imagen = JSON.parse(dest[0].imagen);
-        console.log(dest);
+        dest.forEach(d => {
+          d.imagen = JSON.parse(d.imagen); //Parseamos bien el JSON
+        });
         response.render("index", {destinos : dest});
     }
   });
 });
+
+//Parametrico para cada posible destino
+app.get("/:dest", function(request, response){
+  const destino = request.params.dest;
+  response.status(200);
+  daoDestino.buscarDestino(destino, (err, dest) => {
+    if (err) {
+      console.error("Error al buscar el usuario:", err);
+    } else {
+      //Parseamos el JSON para que este bien
+      dest.imagen = JSON.parse(dest.imagen);
+      dest.descripcion = JSON.parse(dest.descripcion);
+      response.render("destino", {destino : dest});
+    }
+  });
+});
+
 
 app.listen(3000, function(err) {
   if (err) {

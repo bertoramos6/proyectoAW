@@ -14,7 +14,7 @@ class DAODestino {
                 callback(err)
             } else {
                 connection.query(
-                    `SELECT * FROM destinos`,
+                    `SELECT nombre,imagen,precio FROM destinos`,
                     function(err, rows){
                         connection.release();
                         if(err){

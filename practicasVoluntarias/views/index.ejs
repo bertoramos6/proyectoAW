@@ -47,7 +47,9 @@
         <% destinos.forEach(function(dest) {%>
         <div class="col">
           <div class="card">
-            <img class="card-img-top" src="/images/<%=dest.imagen[0]%>" alt="barcelona">
+            <a href="/<%=dest.nombre%>">
+              <img class="card-img-top" src="/images/<%=dest.imagen[0]%>" alt="barcelona">
+            </a>
             <div class="card-body">
               <h3 class="card-title"><%=dest.nombre %></h3>
               <p class="card-text">Desde <%=dest.precio%>€</p>

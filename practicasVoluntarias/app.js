@@ -38,7 +38,7 @@ app.get("/:dest", function(request, response){
       //Parseamos el JSON para que este bien
       dest.imagen = JSON.parse(dest.imagen);
       dest.descripcion = JSON.parse(dest.descripcion);
-      response.render("destino", {destino : dest});
+      response.render("destino", {dest: dest});
     }
   });
 });

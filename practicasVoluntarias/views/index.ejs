@@ -1,11 +1,87 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>Practica Voluntaria 1</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbar-toggler">
+            <img src="/images/logo-big-transparent.png" alt="logo de Odyssey Travel" class="navbar-brand">
+            <ul class="navbar-nav d-flex justify-content-center align-items-center">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Sobre nosotros</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    
+    <div class="container search">
+        <form class="d-flex" role="search">
+            <button class="btn " type="submit"><img src="/images/search.svg" alt="buscar"></button>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+    </div>
+
+    <div class="container mainCard">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <% destinos.forEach(function(dest) {%>
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="/images/<%=dest.imagen[0]%>" alt="barcelona">
+            <div class="card-body">
+              <h3 class="card-title"><%=dest.nombre %></h3>
+              <p class="card-text">Desde <%=dest.precio%>€</p>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    
+    <div class="ver-mas-container">
+      <button class="ver-mas-boton">Ver más destinos</button>
+    </div>
+
+    <div class="row footer-container">
+      <div class="col-md-9 footer-text-container">
+        <img src="/images/logo-small-transparent.png" alt="logo de la agencia Odyssey Travel en formato pequeño" class="footer-logo">
+        <div class="footer-text">Política de cookies</div>
+        <div class="footer-text">Política de privacidad</div>
+        <div class="footer-text">FAQ</div>
+      </div>
+      <div class="col-md-3 float-right footer-icons-container">
+        <a target="_blank" href="https://instagram.com">
+          <img src="/images/instagram.png" alt="Logo instagram" class="imagen-logo">
+        </a>
+        <a target="_blank" href="https://twitter.com">
+            <img src="/images/twitter.png" alt="Logo twitter" class="imagen-logo">
+        </a>
+        <a target="_blank" href="https://facebook.com">
+            <img src="/images/facebook.png" alt="Logo facebook" class="imagen-logo">
+        </a>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -1,6 +1,7 @@
 "use strict";
 const express = require('express');
 const path = require('path');
+const morgan = require("morgan");
 const DAODestino = require("./database/DAODestino")  
 const daoDestino = new DAODestino();
 const app = express();
@@ -9,7 +10,11 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(express.static(path.join(__dirname, 'public'))); // Ficheros estáticos
+//middleware de registro de peticiones morgan
+app.use(morgan("dev"));
+
+// Ficheros estáticos
+app.use(express.static(path.join(__dirname, 'public'))); 
 
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
@@ -43,6 +48,12 @@ app.get("/:dest", function(request, response){
       response.render("destino", {dest: dest});
     }
   });
+});
+
+//middleware de errores NOT FOUND URL
+app.use((request, response, next) => {
+  response.status(404);
+  response.render("error", { url: request.url });
 });
 
 

@@ -42,7 +42,7 @@ app.get("/:dest", function(request, response,next){
     if (err) {
       next(err);
     } else {  
-      //el destion URL no existe
+      //Si no existe el destino URL va a el middleware de fallos
       if(dest === undefined)
         next();
       else{

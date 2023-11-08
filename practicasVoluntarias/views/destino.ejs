@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="/javascripts/condicionesFormReserva.js"></script>
 
     <title>Practica Voluntaria 1</title>
 </head>
@@ -16,12 +17,33 @@
     <%- include("header") %> <!-- subplantilla -->
     
     <div class="container contenedor-informacion-detallada">
-        <h1 class="text-center titulo-destino"><%=dest.nombre%></h1> <!-- TODO: Cambiar por el nombre del destino -->
+        <h1 class="text-center titulo-destino"><%=dest.nombre%></h1>
         <div class="row info-detallada-destino">
             <div class="col-lg-6 col-sm-12">
-                <img class="img-fluid imagen-destino-main" src="/images/<%=dest.imagen[0]%>" alt="barcelona">
+                <div id="carruselImagenesDestinos" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img class=" imagen-destino-main d-block w-100" src="/images/<%=dest.imagen[0]%>" alt="First slide">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="imagen-destino-main d-block w-100" src="/images/<%=dest.imagen[1]%>"  alt="Second slide">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="imagen-destino-main d-block w-100" src="/images/<%=dest.imagen[2]%>"  alt="Third slide">
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carruselImagenesDestinos" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Prev.</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carruselImagenesDestinos" role="button" data-slide="next">
+                        <span class="sr-only">Sig.</span>
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
+                  </div>
+                <!-- <img class="img-fluid imagen-destino-main" src="/images/<%=dest.imagen[0]%>" alt="barcelona"> -->
             </div>
-            <div class="col-lg-6 col-sm-12 align-items-center texto-detallado-destino"> <!-- TODO: Cambiar por el descripcion en json del destino -->
+            <div class="col-lg-6 col-sm-12 align-items-center texto-detallado-destino"> 
                 <% for(let i = 0; i < dest.descripcion.Header.length;i++) { %>
                     <h4><%= dest.descripcion.Header[i] %></h4>
                     <p><%= dest.descripcion.Text[i] %></p>
@@ -67,7 +89,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            Tu reserva para <%=dest.nombre%> ha sido realizada con éxito. ¡Nos vemos pronto! <!-- TODO: Añadir datos de la reserva -->
+            Tu reserva para <%=dest.nombre%> ha sido realizada con éxito. ¡Nos vemos pronto!
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -77,49 +99,6 @@
     </div>
 
     <%- include("footer") %> <!-- subplantilla -->
-    
-    <script>
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                let forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                let validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        } else {
-                            let startDate = new Date(document.getElementById('startDate').value);
-                            let endDate = new Date(document.getElementById('endDate').value);
-                            let today = new Date();
-                            today.setHours(0,0,0,0);
-                            
-                            if (startDate < today) {
-                                alert('La fecha de inicio debe ser posterior a hoy.');
-                                event.preventDefault();
-                                event.stopPropagation();
-                                return false;
-                            }
-                            
-                            if (endDate < startDate) {
-                                alert('La fecha de fin debe ser posterior a la fecha de inicio.');
-                                event.preventDefault();
-                                event.stopPropagation();
-                                return false;
-                            }
-
-                            // Mostramos el modal con el éxito de la reserva
-                            let successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                            successModal.show();
-                            form.classList.add('was-validated');
-                        }
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

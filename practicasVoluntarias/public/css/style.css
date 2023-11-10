@@ -141,7 +141,7 @@ Estilos del footer
     padding: 3rem;
     justify-content: space-between;
     flex-wrap: wrap;
-    width: 110%;
+    width: 100%;
 }
 
 .footer-text-container {
@@ -199,9 +199,13 @@ Estilos de la página de destino
 }
 
 .imagen-destino-main {
-    border-radius: 2rem 0;
     height: 100%;
     object-fit: cover;
+    max-height: 450px;
+}
+
+.imagenes-destino-carrusel {
+    border-radius: 2rem 0;
 }
 
 .info-detallada-destino {

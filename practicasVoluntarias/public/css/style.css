@@ -214,7 +214,6 @@ Estilos de la página de destino
 
 @media screen and (max-width: 992px) {
     .texto-detallado-destino {
-        overflow: none;
         margin-top: 2rem;
     }
 }
@@ -234,6 +233,6 @@ Estilos del formulario de reserva
     margin: 2rem 0;
 }
 
-.form-control {
+.celda-form-reserva {
     margin-bottom: 1rem;
 }

@@ -14,9 +14,9 @@ class DAOReserva {
                 callback(err)
             } else {
                 connection.query(
-                    `INSERT INTO reservas destino_id, nombre_cliente, correo_cliente, fecha_inicio, fecha_fin
-                    VALUES (?,?,?,?,?)`,
-                    [reserva.dest], [reserva.nombre], [reserva.correo], [reserva.inicio], [reserva.fin],
+                    `INSERT INTO reservas (destino_id, nombre_cliente, primer_apll, segundo_apll, correo_cliente, fecha_inicio, fecha_fin)
+                    VALUES (?,?,?,?,?,?,?)`,
+                    [reserva.destId, reserva.nombre, reserva.primerApellido, reserva.segundoApellido, reserva.emailReserva, reserva.inicio, reserva.fin],
                     function(err, rows){
                         connection.release();
                         if(err){

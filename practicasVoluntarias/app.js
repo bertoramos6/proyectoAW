@@ -2,22 +2,24 @@
 const express = require('express');
 const path = require('path');
 const morgan = require("morgan");
-const DAODestino = require("./database/DAODestino")  
+const multer = require('multer');
+const DAODestino = require("./database/DAODestino");  
+const DAOReserva = require("./database/DAOReserva");  
+const daoReserva = new DAOReserva();
 const daoDestino = new DAODestino();
 const app = express();
+
+const storage = multer.memoryStorage(); // Almacenar los datos en memoria en lugar de en archivos
+const upload = multer({ storage: storage });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 //middleware de registro de peticiones morgan
 app.use(morgan("dev"));
 
 // Ficheros estáticos
 app.use(express.static(path.join(__dirname, 'public'))); 
-
-//app.use('/', indexRouter);
-//app.use('/users', usersRouter);
 
 //Ruta principal
 app.get("/", function(request, response,next) {
@@ -42,7 +44,7 @@ app.get("/:dest", function(request, response,next){
     if (err) {
       next(err);
     } else {  
-      //Si no existe el destino URL va a el middleware de fallos
+      //Si no existe el destino URL va a el middleware de rutas no encontrada
       if(dest === undefined)
         next();
       else{
@@ -51,6 +53,23 @@ app.get("/:dest", function(request, response,next){
         dest.descripcion = JSON.parse(dest.descripcion);
         response.render("destino", {dest: dest});
       }
+    }
+  });
+});
+
+//Se llama desde el cliente a /form
+app.post("/form",upload.none(),function(request, response,next){
+  //Parseamos para que en el DAO no de error
+  const requestData = JSON.parse(JSON.stringify(request.body));
+  daoDestino.buscarDestino(requestData.dest, (err, dest) => {
+    if (err) {
+      next(err);
+    } else {  
+        requestData.destId = dest.id;
+        daoReserva.insertarReserva(requestData, (err, resv) => {
+          if (err) 
+            next(err);
+        });
     }
   });
 });
@@ -75,13 +94,11 @@ app.use((error, request, response, next) => {
 });
 
 
-
 app.listen(3000, function(err) {
   if (err) {
-    console.log(err);
+    console.error(err);
   } else {
     console.log("Servidor corriendo en el puerto 3000");
   }
 });
 
-module.exports = app;

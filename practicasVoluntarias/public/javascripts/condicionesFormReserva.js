@@ -28,7 +28,22 @@
                         event.stopPropagation();
                         return false;
                     }
+                    event.preventDefault(); // Detener el envío del formulario por defecto
 
+                    const formData = new FormData(form);
+             
+                    fetch('/form', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        // Manejar la respuesta si es necesaria
+                        console.log("Datos enviados con éxito");
+                    })
+                    .catch(error => {
+                        // Manejar errores si es necesario
+                        console.error('Error al enviar los datos', error);
+                    });
                     // Mostramos el modal con el éxito de la reserva
                     let successModal = new bootstrap.Modal(document.getElementById('successModal'));
                     successModal.show();

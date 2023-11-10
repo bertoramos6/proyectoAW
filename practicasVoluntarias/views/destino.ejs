@@ -55,37 +55,43 @@
                 <% }; %>
             </div>
         </div>
+        <!-- Formulario de reserva -->
         <div class="row contenedor-formulario-reserva">
-            <form class="needs-validation formulario-reserva">
+            <form class="needs-validation formulario-reserva" method="POST">
                 <h2 class="text-center">Formulario de reserva</h2>
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Nombre" required>
+                        <input type="text" id="nombre" class="form-control celda-form-reserva" placeholder="Nombre" name="nombre" required>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <label for="apellido1">Primer apellido</label>
-                        <input type="text" id="apellido1" class="form-control" placeholder="Apellido 1" required>
+                        <input type="text" id="apellido1" class="form-control celda-form-reserva" name="primerApellido" placeholder="Apellido 1" required>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <label for="apellido2">Segundo apellido</label>
-                        <input type="text" id="apellido2" class="form-control" placeholder="Apellido 2" required>
+                        <input type="text" id="apellido2" class="form-control celda-form-reserva" name="segundoApellido" placeholder="Apellido 2" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="emailReserva">Correo electrónico</label>
+                        <input type="email" id="emailReserva" class="form-control celda-form-reserva" name="emailReserva" placeholder="Email" required>
                     </div>
                     <div class="col-lg-6">
                         <label for="startDate">Fecha inicio reserva</label>
-                        <input id="startDate" class="form-control" type="date" required>
+                        <input id="startDate" class="form-control celda-form-reserva" type="date" name="inicio" required>
                     </div>
                     <div class="col-lg-6">
                         <label for="endDate">Fecha fin reserva</label>
-                        <input id="endDate" class="form-control" type="date" required>
+                        <input id="endDate" class="form-control celda-form-reserva" type="date" name="fin" required>
                     </div>
                 </div>
+                <input type="hidden" name="dest" value="<%=dest.nombre%>">
                 <button class="btn btn-primary" type="submit">Reservar</button>
             </form>
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal de confirmación de la reserva -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">

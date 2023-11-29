@@ -92,6 +92,17 @@ app.post("/login",upload.none(), function(req, res) {
   });    
 });
 
+app.delete("/logout", function(req, res, next) {
+  req.session.destroy(function(err){
+    if(!err){
+        res.send("Log Out!")
+        res.redirect("/");
+    }
+    else
+      next(err);
+  })
+});
+
 //Ruta de registro
 app.get("/registroUsuario", function(req, res, next) {
   res.status(200);

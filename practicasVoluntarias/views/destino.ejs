@@ -16,7 +16,7 @@
     <title><%=dest.nombre%></title>
 </head>
 <body>
-    <%- include("header") %> <!-- subplantilla -->
+    <%- include("header", { ses :dest.session }) %> <!-- subplantilla -->
     
     <div class="container contenedor-informacion-detallada">
         <h1 class="text-center titulo-destino"><%=dest.nombre%></h1>

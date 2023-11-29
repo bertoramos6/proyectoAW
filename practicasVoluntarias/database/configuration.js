@@ -12,6 +12,7 @@ const connection = {
 
 const pool = mysql.createPool(connection);
 
-exports.getPool = () => {
-  return pool;
+module.exports = {
+  connection: connection,
+  getPool: () => pool,
 };

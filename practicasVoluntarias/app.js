@@ -110,14 +110,17 @@ app.get("/registroUsuario", function(req, res, next) {
 });
 
 // Ruta de registro (POST)
-app.post("/registroUsuario", upload.none(),function(req, res, next) {
+app.post(
+  "/registroUsuario",
+  upload.none(),
   // Recoger los datos del formulario
-  check("nombre", "El nombre es obligatorio").notEmpty();
-  check("email", "El email es obligatorio").notEmpty();
-  check("email", "El email no es válido").isEmail();
-  check("contrasena", "La contraseña es obligatoria").notEmpty();
-  check("nombre", "El nombre no puede contener números").matches(/^[a-zA-Z]+$/);
-  check("apellidos", "Los apellidos no pueden contener números").matches(/^[a-zA-Z]+$/);
+  check("nombre", "El nombre es obligatorio").notEmpty(),
+  check("email", "El email es obligatorio").notEmpty(),
+  check("email", "El email no es válido").isEmail(),
+  check("contrasena", "La contraseña es obligatoria").notEmpty(),
+  // Aceptar tildes, diéresis y ñ
+  check("nombre", "El nombre no puede contener números").matches(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g),
+  function(req, res, next) {
   
   let datos = {};
   datos.nombre = req.body.nombre;
@@ -133,7 +136,8 @@ app.post("/registroUsuario", upload.none(),function(req, res, next) {
       if (err) {
         next(err);
       } else {  
-        req.session.user = { email, id: userData.id };
+        //TODO: por que estaba lo de user data aqui?
+        req.session.user = { email: datos.email/*, id: userData.id*/ };
         res.redirect("/");
       }
     });    

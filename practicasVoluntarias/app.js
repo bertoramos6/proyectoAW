@@ -129,6 +129,7 @@ app.post(
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log(errors.array());
     // Si hay errores, renderizamos la vista de registro de nuevo con los errores
     return res.render("registroUsuario", { errores: errors.array() });
   } else {
@@ -164,7 +165,7 @@ app.get("/:dest", function(request, response,next){
           console.log("Sesion Abierta")
           dest.session = request.session.user.correo;
         }
-        response.render("destino", {dest: dest});
+        response.render("destino", {dest: dest, comentarios: {}});
       }
     }
   });

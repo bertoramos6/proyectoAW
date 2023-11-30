@@ -226,6 +226,22 @@ Estilos de la página de destino
 }
 
 /*
+Estilos de la sección de comentarios
+*/
+
+.contenedor-comentarios {
+    margin-bottom: 2rem;
+}
+
+#botonVerComentarios {
+    margin: auto 0 auto 0;
+}
+
+#comentario {
+    margin: 3rem 0 1rem 0;
+}
+
+/*
 Estilos del formulario de reserva
 */
 

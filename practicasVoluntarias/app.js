@@ -12,9 +12,11 @@ const { check, validationResult } = require("express-validator");
 const DAODestino = require("./database/DAODestino");  
 const DAOReserva = require("./database/DAOReserva");  
 const DAOUsuario = require('./database/DAOUsuario')
+const DAOComentario = require('./database/DAOComentario')
 const daoReserva = new DAOReserva();
 const daoDestino = new DAODestino();
 const daoUsuario = new DAOUsuario();
+const daoComentario = new DAOComentario();
 const app = express();
 
 const storage = multer.memoryStorage(); // Almacenar los datos en memoria en lugar de en archivos
@@ -184,6 +186,17 @@ app.post("/form",upload.none(),function(request, response,next){
           if (err) 
             next(err);
         });
+    }
+  });
+});
+
+app.get("/comentarios", function(request, response,next){
+  console.log(request);
+  daoComentario.buscarTodosComentarios((err, comentarios) => {
+    if (err) {
+      next(err);
+    } else {  
+      response.render("comentarios", {comentarios: comentarios});
     }
   });
 });

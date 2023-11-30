@@ -9,6 +9,7 @@ $(document).ready(() => {
             success: (data) => {
                 // Hacer un if que si no hay comentarios, añada el texto de que aun no hay comentarios
                 $('#comentarios').html(data);
+                botonVerComentarios.hide();
             },
             error: (error) => {
                 $("#errorLogin").text("Usuario o contraseña incorrectos");

@@ -2,6 +2,6 @@
     <p>No hay comentarios sobre este destino</p>
 <% } else { %>
     <% for (let i = 0; i < comentarios.length; i++) { %>
-        <p>comentarios[i].msg</p>
+        <p><%= comentarios[i].comentario %></p>
     <% } %>
 <% }; %>

@@ -8,13 +8,13 @@ class DAOComentario{
         this.pool = db.getPool();
     }
 
-    buscarTodosComentarios(callback){
+    buscarComentariosDestino(destId, callback){
         this.pool.getConnection((err, connection) => {
             if (err) {
                 callback(err)
             } else {
                 connection.query(
-                    `SELECT * FROM comentarios`,
+                    `SELECT * FROM comentarios WHERE destino_id = ?`, [destId],
                     function(err, rows){
                         connection.release();
                         if(err){
@@ -30,15 +30,15 @@ class DAOComentario{
         });
     }
 
-    insertarComentario(reserva,callback){
+    insertarComentario(comentario, callback){
         this.pool.getConnection((err, connection) => {
             if (err) {
                 callback(err)
             } else {
                 connection.query(
-                    `INSERT INTO comentario (destino_id, id_usuario, nombre_usuario, comentario, fecha_comentario)
+                    `INSERT INTO comentarios (destino_id, id_usuario, nombre_usuario, comentario, fecha_comentario)
                     VALUES (?,?,?,?,?)`,
-                    [reserva.destId, reserva.nombre, reserva.primerApellido, reserva.segundoApellido, reserva.emailReserva, reserva.inicio, reserva.fin],
+                    [comentario.destId, comentario.idUsuario, comentario.nombreUsuario, comentario.comentario, comentario.fechaComentario],
                     function(err, rows){
                         connection.release();
                         if(err){

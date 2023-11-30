@@ -83,7 +83,7 @@ app.post("/login",upload.none(), function(req, res) {
           next(err);
         } 
         if (valid) {
-          req.session.user = { correo, id: usr.id };
+          req.session.user = { correo, id: usr.id, nombre: usr.nombre };
           res.redirect("/");
         } else {
           console.log("Contraseña invalida");
@@ -140,7 +140,7 @@ app.post(
         next(err);
       } else {  
         //TODO: por que estaba lo de user data aqui?
-        req.session.user = { email: datos.email/*, id: userData.id*/ };
+        req.session.user = { correo, id: usr.id, nombre: usr.nombre };
         res.redirect("/");
       }
     });    
@@ -190,15 +190,58 @@ app.post("/form",upload.none(),function(request, response,next){
   });
 });
 
-app.get("/comentarios", function(request, response,next){
-  console.log(request);
-  daoComentario.buscarTodosComentarios((err, comentarios) => {
+app.get("/comentarios/:dest", function(request, response,next){
+  let destino = request.params.dest;
+
+  daoDestino.buscarDestino(destino, (err, dest) => {
+    if (err) {
+      next(err);
+    } else {
+      destino = dest;
+      daoComentario.buscarComentariosDestino(destino.id, (err, comentarios) => {
+        if (err) {
+          //console.log(err);
+          next(err);
+        } else {  
+          console.log('comentarios: ', comentarios);
+          response.render("comentarios", {comentarios: comentarios});
+        }
+      });
+    }
+  });
+});
+
+app.post("/comentarios/:dest",upload.none(),function(request, response,next){
+  const requestData = JSON.parse(JSON.stringify(request.body));
+  requestData.destino = request.params.dest;
+
+  daoDestino.buscarDestino(requestData.destino, (err, dest) => {
     if (err) {
       next(err);
     } else {  
-      response.render("comentarios", {comentarios: comentarios});
+        requestData.destId = dest.id;
+        requestData.idUsuario = request.session.user.id;
+        requestData.nombreUsuario = request.session.user.nombre;
+        //añadir al request data la fecha actual del comentario (tipo timestamp en mysql)
+        requestData.fechaComentario = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        daoComentario.insertarComentario(requestData, (err, comId) => {
+          if (err) {
+            next(err);
+          }
+          else{
+            response.status(200);
+            // daoComentario.buscarComentariosDestino(requestData.destId, (err, comentarios) => {
+            //   if (err) {
+            //     next(err);
+            //   } else {  
+            //     response.render("comentarios", {comentarios: comentarios});
+            //   }
+            // });
+          }
+        });
     }
   });
+  response.status(200);
 });
 
 // Middleware para manejar rutas no encontradas

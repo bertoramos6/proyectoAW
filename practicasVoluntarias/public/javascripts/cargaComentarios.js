@@ -3,8 +3,12 @@ $(document).ready(() => {
     const botonAddComentario = $('#botonAddComentario');
 
     botonVerComentarios.on('click', () => {
+        const url = window.location.href;
+        const ultimoSlash = url.lastIndexOf('/');
+        const nombreDestino = url.substring(ultimoSlash + 1);
+
         $.ajax({
-            url: '/comentarios',
+            url: '/comentarios/' + nombreDestino,
             method: 'GET',
             success: (data) => {
                 // Hacer un if que si no hay comentarios, añada el texto de que aun no hay comentarios
@@ -18,14 +22,19 @@ $(document).ready(() => {
     });
 
     botonAddComentario.on('click', () => {
+        const url = window.location.href;
+        const ultimoSlash = url.lastIndexOf('/');
+        const nombreDestino = url.substring(ultimoSlash + 1);
+
         $.ajax({
-            url: '/comentarios',
+            url: '/comentarios/' + nombreDestino,
             method: 'POST',
             data: {
                 comentario: $('#comentario').val()
             },
             success: (data) => {
-                $('#comentarios').html(data);
+                $('#mensajeComentarioAdded').show();
+                //$('#comentarios').html(data);
             },
             error: (error) => {
                 $("#errorLogin").text("Usuario o contraseña incorrectos");

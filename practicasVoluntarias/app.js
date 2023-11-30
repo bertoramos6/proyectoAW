@@ -61,13 +61,12 @@ app.get("/", function(request, response,next) {
           datos.session = request.session.user.correo;
         }
 
-        console.log(datos)
         response.render("index", {datos});
     }
   });
 });
 
-app.post("/login",upload.none(), function(req, res) {
+app.post("/login",upload.none(), function(req, res, next) {
   const { correo, contrasena } = req.body
   daoUsuario.buscarPorEmail(correo, (err, usr) => {
     if (err) {
@@ -75,6 +74,9 @@ app.post("/login",upload.none(), function(req, res) {
     } else {  
       if(usr === undefined){
         console.log("Email no existe");
+        const error = new Error("Email no existe");
+        error.status = 401;
+        next(error);
         return;
       }
 
@@ -87,7 +89,9 @@ app.post("/login",upload.none(), function(req, res) {
           res.redirect("/");
         } else {
           console.log("Contraseña invalida");
-          res.status(401).end(); // contraseña invalida
+          const error = new Error("Contraseña invalida");
+          error.status = 401;
+          next(error);
         }
       });
     }
@@ -131,7 +135,6 @@ app.post(
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors.array());
     // Si hay errores, renderizamos la vista de registro de nuevo con los errores
     return res.render("registroUsuario", { errores: errors.array() });
   } else {
@@ -140,7 +143,7 @@ app.post(
         next(err);
       } else {  
         //TODO: por que estaba lo de user data aqui?
-        req.session.user = { correo, id: usr.id, nombre: usr.nombre };
+        req.session.user = { correo: usr.email, id: usr.id, nombre: usr.nombre };
         res.redirect("/");
       }
     });    
@@ -164,7 +167,6 @@ app.get("/:dest", function(request, response,next){
         dest.imagen = JSON.parse(dest.imagen);
         dest.descripcion = JSON.parse(dest.descripcion);
         if(request.session.user !== undefined){
-          console.log("Sesion Abierta")
           dest.session = request.session.user.correo;
         }
         response.render("destino", {dest: dest, comentarios: {}});
@@ -200,10 +202,8 @@ app.get("/comentarios/:dest", function(request, response,next){
       destino = dest;
       daoComentario.buscarComentariosDestino(destino.id, (err, comentarios) => {
         if (err) {
-          //console.log(err);
           next(err);
         } else {  
-          console.log('comentarios: ', comentarios);
           response.render("comentarios", {comentarios: comentarios});
         }
       });
@@ -230,13 +230,7 @@ app.post("/comentarios/:dest",upload.none(),function(request, response,next){
           }
           else{
             response.status(200);
-            // daoComentario.buscarComentariosDestino(requestData.destId, (err, comentarios) => {
-            //   if (err) {
-            //     next(err);
-            //   } else {  
-            //     response.render("comentarios", {comentarios: comentarios});
-            //   }
-            // });
+            response.send(request.params.dest);
           }
         });
     }

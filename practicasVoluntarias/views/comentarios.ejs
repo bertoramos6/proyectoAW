@@ -2,6 +2,19 @@
     <p>No hay comentarios sobre este destino</p>
 <% } else { %>
     <% for (let i = 0; i < comentarios.length; i++) { %>
-        <p><%= comentarios[i].comentario %></p>
+        <div class="comentarioContainer">
+            <div class="row headerComentario">
+                <div class="col-6">
+                    <p><%= comentarios[i].nombre_usuario %></p>
+                </div>
+                <div class="col-6 text-end">
+                    <% const date = new Date(comentarios[i].fecha_comentario) %>
+                    <p><%= date.getDate() %>/<%= date.getMonth() + 1 %>/<%= date.getFullYear() %> <%=date.getHours() %>:<%=date.getMinutes().toString().padStart(2, '0') %></p>
+                </div>
+            </div>
+            <div class=" row contenidoComentario">
+                <p><%= comentarios[i].comentario %></p>
+            </div>
+        </div>
     <% } %>
 <% }; %>

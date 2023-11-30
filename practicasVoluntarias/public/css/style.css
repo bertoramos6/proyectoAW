@@ -225,7 +225,21 @@ Estilos de la página de destino
     }
 }
 
-/*
+#mensajeComentarioAdded {
+    margin-top: 1rem;
+    display: none;
+}
+
+#mensajeComentarioErrorAdd {
+    margin-top: 1rem;
+    display: none;
+}
+
+#botonRecargarComentarios {
+    display: none;
+}
+
+/*  
 Estilos de la sección de comentarios
 */
 
@@ -241,6 +255,24 @@ Estilos de la sección de comentarios
     margin: 3rem 0 1rem 0;
 }
 
+.comentarioContainer {
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.headerComentario {
+    padding-top: 1rem;
+    color: white;
+    font-weight: 700;
+    background-color:#062b81;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.contenidoComentario {
+    padding-top: 1rem;
+    border: 1px solid #062b81;
+}
+
 /*
 Estilos del formulario de reserva
 */
@@ -251,4 +283,28 @@ Estilos del formulario de reserva
 
 .celda-form-reserva {
     margin-bottom: 1rem;
+}
+
+/*
+Estilos de la página de logout
+*/
+
+.contenedorLogout {
+    margin: 2rem;
+}
+
+.linkLogout {
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #103CA3;
+    font-weight: 700;
+}
+
+#cancelLogout {
+    color: lime;
+}
+
+#logout {
+    color: red;
 }

@@ -18,7 +18,7 @@
     <title><%=dest.nombre%></title>
 </head>
 <body>
-    <%- include("header", { ses :dest.session }) %> <!-- subplantilla -->
+    <%- include("header", { ses: dest.session }) %> <!-- subplantilla -->
     
     <div class="container contenedor-informacion-detallada">
         <h1 class="text-center titulo-destino"><%=dest.nombre%></h1>
@@ -94,15 +94,18 @@
 
         <div class="container contenedor-comentarios">
             <h2 class="text-center">Comentarios sobre el destino</h2>
-            <button id="botonVerComentarios" class="btn btn-primary">Ver comentarios</button>
+            <button class="botonVerComentarios btn btn-primary">Ver comentarios</button>
+            <button class="botonVerComentarios btn btn-primary" id="botonRecargarComentarios">Recargar comentarios</button>
 
             <!-- En este div se meteran los comentarios de a BD -->
             <div id="comentarios">
             </div>
-
-            <textarea id="comentario" class="form-control celda-form-reserva" name="comentario" placeholder="Escribe tu comentario" rows="5"></textarea>
-            <button id="botonAddComentario" class="btn btn-primary">Añadir comentario</button>
-            <div id="mensajeComentarioAdded" class="alert alert-success" role="alert" style="display: none">Comentario añadido con éxito</div>
+            <% if (dest.session !== undefined) {  %>
+                <textarea id="comentario" class="form-control celda-form-reserva" name="comentario" placeholder="Escribe tu comentario" rows="5"></textarea>
+                <button id="botonAddComentario" class="btn btn-primary">Añadir comentario</button>
+                <div id="mensajeComentarioAdded" class="alert alert-success" role="alert">Comentario añadido con éxito</div>
+                <div id="mensajeComentarioErrorAdd" class="alert alert-danger" role="alert">El comentario no puede estar vacío</div>
+            <% }; %>
         </div>
     </div>
 

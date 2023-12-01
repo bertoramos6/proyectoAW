@@ -79,15 +79,7 @@ CREATE TABLE `reservas` (
   `fecha_fin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `reservas`
---
 
-INSERT INTO `reservas` (`id`, `destino_id`, `nombre_cliente`, `primer_apll`, `segundo_apll`, `correo_cliente`, `fecha_inicio`, `fecha_fin`) VALUES
-(2, 22, 's', 'a', 'as', 'am.@ucm.es', '2023-11-11', '2023-11-18'),
-(3, 18, 'Alberto', 'Ramos', 'Paco', 'manolo@gmail.es', '2023-12-01', '2023-12-04');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sessions`
@@ -99,12 +91,6 @@ CREATE TABLE `sessions` (
   `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `sessions`
---
-
-INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('aCHkPNWOw-0cE617ZT4PAZPUYIjxrBzH', 1701445176, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"email\":\"ejemplo@ejemplo.es\"}}');
 
 -- --------------------------------------------------------
 
@@ -118,20 +104,6 @@ CREATE TABLE `Usuarios` (
   `email` varchar(40) NOT NULL,
   `contraseña` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `Usuarios`
---
-
-INSERT INTO `Usuarios` (`id`, `nombre`, `email`, `contraseña`) VALUES
-(4, 'samuel', 'samuelap@ucm.es', '$2b$11$0TdRGM698cKEyBCyPYZFwuDh1SRGHdurPKUhBZg5dBZAQADbph6NW'),
-(5, 'Alberto', 'albram06@ucm.es', '$2b$11$XJfE4/uV3xdeLb2z9d3ydeiMyU/JjUXceRAGwtSdBf8zJQ41L8nOy'),
-(6, 'tyu7', 'fgh@gmail.net', '$2b$11$bQCC4hHWOg3E66vuc3smN.c.GKDnQ5Ys2U3b3V4hSbYJKUN0shpim'),
-(7, 'Álvaro Ñu', 'ejemplo@ejemplo.com', '$2b$11$VAitfbPxVewOBRKAPR1bn.vSMRxbW1PRWruGWrSovNjFTgIgg9oAC'),
-(8, 'alberto', 'email@example.es', '$2b$11$M55..OGbpRDhV8b1Z3Njau9pb/.LI15MyGvMY.QBkHpPd0j/ow8Qm'),
-(9, 'Álvaro Ñu', 'ejamplo@ejemplo.es', '$2b$11$Ci6P7ybr/YKkyT3EDl8BvuTHczmC/1.wuqyfZ3EY4O6Tpsmspjm/q'),
-(11, 'Álvaro Ñu', 'bertoramos2001@gmail.com', '$2b$11$876An8jPVcWccDowa5v3Xuxyz48/bfYXDgxh7lRPZSxV02QBvj8XO'),
-(12, 'manolo', 'ejemplo@ejemplo.es', '$2b$11$wFiVPi1JI6pNxhE9XYJiJu9hpoUuxoj3ybkNrIIjWNPdfhfICooVK');
 
 --
 -- Índices para tablas volcadas

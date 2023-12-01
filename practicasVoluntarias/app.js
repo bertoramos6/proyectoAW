@@ -133,21 +133,34 @@ app.post(
   datos.email = req.body.email;
   datos.contrasena =  bcrypt.hashSync(req.body.contrasena,11); //encriptar contraseña
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    // Si hay errores, renderizamos la vista de registro de nuevo con los errores
-    return res.render("registroUsuario", { errores: errors.array() });
-  } else {
-    daoUsuario.insertarUsuario(datos, (err, usr) => {
-      if (err) {
-        next(err);
-      } else {  
-        //TODO: por que estaba lo de user data aqui?
-        req.session.user = { correo: usr.email, id: usr.id, nombre: usr.nombre };
-        res.redirect("/");
+
+
+  daoUsuario.buscarPorEmail(datos.email, (err, usr) => {
+    if (err) {
+      next(err);
+    } else {  
+      console.log(usr);
+      let errors = validationResult(req);
+      if(usr !== undefined){
+        errors.errors.push({
+          msg: 'Email duplicado',
+        });
       }
-    });    
-  }
+      if (!errors.isEmpty()) {
+        // Si hay errores, renderizamos la vista de registro de nuevo con los errores
+        return res.render("registroUsuario", { errores: errors.array() });
+      } else {
+        daoUsuario.insertarUsuario(datos, (err, usr) => {
+          if (err) {
+            next(err);
+          } else {  
+            req.session.user = { correo: datos.email, id: usr, nombre: datos.nombre };
+            res.redirect("/");
+          }
+        });    
+      }
+    }
+  });
 });
 
 

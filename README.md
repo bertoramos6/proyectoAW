@@ -1,7 +1,8 @@
-# proyectoAW
-## Separado en prácticas voluntarias y práctica obligatoria
+# Projects for my university course called "Web Applications"
+## Separated in voluntary and mandatory lab
 
-### Prácticas Voluntarias
-#### Práctica 1
+### Voluntary Lab
+In this part of the course, we had to build an app that allowed users to look for destinations and make flight reservations. This labs were used to practice for the mandatory labs and used simple techniques and technologies.
 
-### Práctica Obligatoria
+### Mandatory Lab
+For this part, we had to build a full website that managed the reservations of different facilities for a university. To do this, we used technologies such as express, node, JQuery, Bootstrap and many more.
